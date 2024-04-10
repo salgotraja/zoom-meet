@@ -11,6 +11,10 @@ jobs:
   deploy:
     name: Build zoom-clone
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./zoom-clone
+    
 
     steps:
       - name: Checkout repository
@@ -29,16 +33,14 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./zoom-clone
 
       - name: Build zoom clone app
         run: npm run build
-        working-directory: ./zoom-clone
 
       - if: ${{ github.ref == 'refs/heads/main' }}
         name: Build and Publish Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/zoom-clone ./zoom-clone
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/zoom-clone .
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker push ${{ secrets.DOCKER_USERNAME }}/zoom-clone
 
