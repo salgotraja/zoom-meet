@@ -29,9 +29,11 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./zoom-clone
 
       - name: Build zoom clone app
         run: npm run build
+        working-directory: ./zoom-clone
 
       - if: ${{ github.ref == 'refs/heads/main' }}
         name: Build and Publish Docker Image
