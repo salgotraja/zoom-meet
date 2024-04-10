@@ -16,8 +16,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Change working directory
-        run: cd ./zoom-clone/zoom-clone
+      - name: Print working directory
+        run: pwd
          
       - name: List files in the repository
         run: ls -la
