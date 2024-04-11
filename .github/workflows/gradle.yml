@@ -41,12 +41,13 @@ jobs:
         run: |
           echo "Running Docker build and push commands..."
           echo "Repository name: zoom-clone:latest"
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/zoom-clone:latest ./zoom-clone
+          docker build -t salgotraja/zoom-clone:latest ./zoom-clone
           echo "Attempting to log in to Docker Hub..."
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker login -u testuser -p ${{ secrets.DOCKER_PASSWORD }}
           echo "Docker login succeeded. Pushing image..."
-          docker push ${{ secrets.DOCKER_USERNAME }}/zoom-clone:latest
+          docker push testuser/zoom-clone:latest
         working-directory: ./zoom-clone
+
 
 
       
