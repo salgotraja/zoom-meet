@@ -37,13 +37,12 @@ jobs:
       - name: Build zoom clone app
         run: npm run build
 
-      - if: ${{ github.ref == 'refs/heads/main' }}
-        name: Build and Publish Docker Image
+      - name: Build and Publish Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/zoom-clone .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/zoom-clone:latest ./zoom-clone
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker ps -a
-          docker push ${{ secrets.DOCKER_USERNAME }}/zoom-clone
+          docker push ${{ secrets.DOCKER_USERNAME }}/zoom-clone:latest
+      
 
 
 
